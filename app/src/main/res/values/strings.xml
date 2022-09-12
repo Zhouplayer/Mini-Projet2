@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Mini-Projet1: Super machine a sous</string>
+    <string name="tvActif">Vos actifs: </string>
+    <string name="radioButtonUn" translatable="false">1$</string>
+    <string name="radioButtonDeux" translatable="false">2$</string>
+    <string name="radioButtonTrois" translatable="false">5$</string>
+    <string name="btnJouer">Jouer</string>
+    <string name="checkBoxCaisseSous">Casse-cou</string>
+    <string name="tvAjoutMessage">Pour ajouter 100$</string>
+    <string name="tvCodeSevretMessage">Entrer votre code secret</string>
+    <string name="editTextTextCodeSecret">Code secret</string>
+    <string name="itemStats">Statistiques</string>
+    <string name="itemRafraichir">Rafraichir</string>
+    <string name="titreStat">Les statistiques</string>
+</resources>

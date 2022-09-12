@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tvActif">Your money:</string>
+    <string name="btnJouer">Play</string>
+    <string name="tvAjoutMessage">Add 100$</string>
+    <string name="tvCodeSevretMessage">Enter your secret code</string>
+    <string name="editTextTextCodeSecret">Secret code</string>
+    <string name="app_name">Eat money monster</string>
+    <string name="checkBoxCaisseSous">Lucky option</string>
+    <string name="itemStats">Statistics</string>
+    <string name="itemRafraichir">Refresh</string>
+    <string name="titreStat">Informations</string>
+</resources>
