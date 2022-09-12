@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mini-Projet1: Super machine a sous</string>
+    <string name="app_name">Mini-Projet2: Super machine a sous + stats</string>
     <string name="tvActif">Vos actifs: </string>
     <string name="radioButtonUn" translatable="false">1$</string>
     <string name="radioButtonDeux" translatable="false">2$</string>

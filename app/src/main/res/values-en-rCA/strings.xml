@@ -5,7 +5,7 @@
     <string name="tvAjoutMessage">Add 100$</string>
     <string name="tvCodeSevretMessage">Enter your secret code</string>
     <string name="editTextTextCodeSecret">Secret code</string>
-    <string name="app_name">Eat money monster</string>
+    <string name="app_name">Eat money monster + stats</string>
     <string name="checkBoxCaisseSous">Lucky option</string>
     <string name="itemStats">Statistics</string>
     <string name="itemRafraichir">Refresh</string>

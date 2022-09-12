@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
             //Garde les infos
             booGagneOuPas = prixGagne > 0
-            mutablelistDonne.add(Info(imageUn, imageDeux, imageTrois, prixGagne, booGagneOuPas, booCocheCasse, prixChoisie, actifs))
+            mutablelistDonne.add(Info(mutablelistDonne.size, imageArray[imageUn], imageArray[imageDeux], imageArray[imageTrois], prixGagne, booGagneOuPas, booCocheCasse, prixChoisie, actifs))
         }
 
         // Voir si le mot de passe est correct
@@ -239,11 +239,19 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId){
             R.id.menu_Item_Rafraichir ->
             {
+                mutablelistDonne.clear()
+                Toast.makeText(this, "Les statistique sont effacer", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.menu_Item_Static ->
             {
-                startActivity(Intent(this@MainActivity, StatsActivity::class.java))
+                when(mutablelistDonne.size)
+                {
+                    0 -> Toast.makeText(this, "Aucune statistique disponible a l'heure actuelle", Toast.LENGTH_SHORT).show()
+                    else ->{
+                        startActivity(Intent(this@MainActivity, StatsActivity::class.java))
+                    }
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
