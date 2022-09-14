@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Application-Mobile/Mini-Projet2/app/src/main/res/layout/rv_item.xml" value="0.22871376811594202" />
         <entry key="..\:/Application-Mobile/MiniProjet1/app/src/main/res/layout-land/activity_main.xml" value="0.33" />
         <entry key="..\:/Application-Mobile/MiniProjet1/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Application-Mobile/MiniProjet2/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
@@ -12,7 +13,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

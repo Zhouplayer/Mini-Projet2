@@ -1,5 +1,6 @@
 package com.example.mini_projet2
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -21,11 +22,10 @@ class StatsActivity : AppCompatActivity() {
         setSupportActionBar(bindingStat.toolbar2)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_white_arrow_back_24)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        //supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val myList = DataSource().getList()
+        val myList = DataSource.getList()
         val ryView = bindingStat.rvInfos
-        Toast.makeText(this, myList.toString(), Toast.LENGTH_SHORT).show()
         ryView.adapter = ItemAdapter(this, myList)
     }
 }

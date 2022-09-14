@@ -3,22 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mtCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ltBase"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvNumero"
-            android:layout_width="100dp"
-            android:layout_height="0dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
             android:text="TextView"
+            android:textSize="25dp"
             android:textStyle="bold"
-            android:textSize="50dp"
             app:layout_constraintBottom_toBottomOf="@id/imgUn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +28,7 @@
         <ImageView
             android:id="@+id/imgUn"
             android:layout_width="100dp"
-            android:layout_height="0dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toEndOf="@id/tvNumero"
             app:layout_constraintTop_toTopOf="@id/tvNumero"
@@ -35,7 +37,7 @@
         <ImageView
             android:id="@+id/imgDeux"
             android:layout_width="100dp"
-            android:layout_height="0dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toEndOf="@id/imgUn"
             app:layout_constraintTop_toTopOf="@id/tvNumero"
@@ -44,7 +46,7 @@
         <ImageView
             android:id="@+id/imgTrois"
             android:layout_width="100dp"
-            android:layout_height="0dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toEndOf="@id/imgDeux"
             app:layout_constraintTop_toTopOf="@id/tvNumero"
@@ -52,15 +54,16 @@
 
         <TextView
             android:id="@+id/tvInfos"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="8dp"
             android:text="TextView"
-            android:textSize="25dp"
             android:textAlignment="center"
+            android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNumero"/>
+            app:layout_constraintTop_toBottomOf="@id/tvNumero" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

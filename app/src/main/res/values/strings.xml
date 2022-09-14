@@ -12,4 +12,7 @@
     <string name="itemStats">Statistiques</string>
     <string name="itemRafraichir">Rafraichir</string>
     <string name="titreStat">Les statistiques</string>
+    <string name="statMise">Mise: </string>
+    <string name="statGain">Gain: </string>
+    <string name="statNouveauSolde">Nouveau solde: </string>
 </resources>

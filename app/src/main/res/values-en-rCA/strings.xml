@@ -10,4 +10,7 @@
     <string name="itemStats">Statistics</string>
     <string name="itemRafraichir">Refresh</string>
     <string name="titreStat">Informations</string>
+    <string name="statMise">"Put: "</string>
+    <string name="statGain">"Win: "</string>
+    <string name="statNouveauSolde">"New balance: "</string>
 </resources>

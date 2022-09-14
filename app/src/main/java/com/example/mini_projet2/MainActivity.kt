@@ -16,7 +16,6 @@ import com.example.mini_projet2.model.Info
 class MainActivity : AppCompatActivity(){
 
     private lateinit var bindingMain: ActivityMainBinding
-    private var monData = DataSource()
     private val imageArray = arrayOf(
         R.drawable.banane, R.drawable.cgodin,
         R.drawable.charbon,R.drawable.diamant,R.drawable.emeraude,R.drawable.img7,
@@ -29,9 +28,7 @@ class MainActivity : AppCompatActivity(){
     private var prixChoisie = 0
     private var prixGagne = 0
     private var booCocheCasse = false
-    private var booGagneOuPas = false
     private var strCodeSecret = ""
-    private var nbCou = 0
     private val CLE_Actifs = "Actifs"
     private val CLE_ImageUn = "ImageUn"
     private val CLE_ImageDeux = "ImageDeux"
@@ -118,9 +115,8 @@ class MainActivity : AppCompatActivity(){
             actif()
 
             //Garde les infos
-            booGagneOuPas = prixGagne > 0
-            nbCou += 1
-            monData.addInfo(nbCou, imageArray[imageUn], imageArray[imageDeux], imageArray[imageTrois], prixGagne, booGagneOuPas, booCocheCasse, prixChoisie, actifs)
+            var booGagneOuPas = prixGagne > 0
+            DataSource.addInfo(DataSource.getList().size+1, imageArray[imageUn], imageArray[imageDeux], imageArray[imageTrois], prixGagne, booGagneOuPas, booCocheCasse, prixChoisie, actifs)
         }
 
         // Voir si le mot de passe est correct
@@ -178,6 +174,8 @@ class MainActivity : AppCompatActivity(){
         outState.putInt(CLE_ImageDeux, imageDeux)
         outState.putInt(CLE_ImageTrois, imageTrois)
         outState.putInt(CLE_PrixChoisie, prixChoisie)
+
+
 
         if (bindingMain.checkBoxCaisseSous?.isChecked == true)
         {
@@ -244,19 +242,18 @@ class MainActivity : AppCompatActivity(){
         return when(item.itemId){
             R.id.menu_Item_Rafraichir ->
             {
-                DataSource().reInitialisation()
+                DataSource.reInitialisation()
                 Toast.makeText(this, "Les statistique sont effacer", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.menu_Item_Static ->
             {
-                when(nbCou)
+                when(DataSource.getList().size)
                 {
                     0 -> Toast.makeText(this, "Aucune statistique disponible a l'heure actuelle", Toast.LENGTH_SHORT).show()
-                    else ->{
-                        var intent = Intent(this@MainActivity, StatsActivity::class.java)
-                        //intent.putExtra("mutList", monData.getList())
-                        startActivity(intent)
+                    else -> {
+                        //implicite
+                        startActivity(Intent(this@MainActivity, StatsActivity::class.java))
                     }
                 }
                 true

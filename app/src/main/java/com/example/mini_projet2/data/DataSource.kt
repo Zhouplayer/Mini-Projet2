@@ -2,7 +2,7 @@ package com.example.mini_projet2.data
 
 import com.example.mini_projet2.model.Info
 
-class DataSource {
+object DataSource {
 
     private val mutablelistDonne = mutableListOf<Info>()
 
