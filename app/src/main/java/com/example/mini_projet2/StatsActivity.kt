@@ -2,21 +2,30 @@ package com.example.mini_projet2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.mini_projet2.databinding.ActivityStatsBinding
+import com.example.mini_projet2.adapter.ItemAdapter
+import com.example.mini_projet2.data.DataSource
+import com.example.mini_projet2.model.Info
 
 class StatsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityStatsBinding
+    private lateinit var bindingStat: ActivityStatsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityStatsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        bindingStat = ActivityStatsBinding.inflate(layoutInflater)
+        setContentView(bindingStat.root)
 
-        setSupportActionBar(binding.toolbar2)
+        setSupportActionBar(bindingStat.toolbar2)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_white_arrow_back_24)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        val myList = DataSource().getList()
+        val ryView = bindingStat.rvInfos
+        Toast.makeText(this, myList.toString(), Toast.LENGTH_SHORT).show()
+        ryView.adapter = ItemAdapter(this, myList)
     }
 }

@@ -3,18 +3,22 @@ package com.example.mini_projet2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.mini_projet2.data.DataSource
 import com.example.mini_projet2.databinding.ActivityMainBinding
 import com.example.mini_projet2.model.Info
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
-    private lateinit var binding: ActivityMainBinding
-    private val imageArray = arrayOf(R.drawable.banane,R.drawable.cgodin,
+    private lateinit var bindingMain: ActivityMainBinding
+    private var monData = DataSource()
+    private val imageArray = arrayOf(
+        R.drawable.banane, R.drawable.cgodin,
         R.drawable.charbon,R.drawable.diamant,R.drawable.emeraude,R.drawable.img7,
         R.drawable.piece,R.drawable.rubis,R.drawable.sacargent,R.drawable.tresor)
 
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private var booCocheCasse = false
     private var booGagneOuPas = false
     private var strCodeSecret = ""
+    private var nbCou = 0
     private val CLE_Actifs = "Actifs"
     private val CLE_ImageUn = "ImageUn"
     private val CLE_ImageDeux = "ImageDeux"
@@ -34,39 +39,38 @@ class MainActivity : AppCompatActivity() {
     private val CLE_PrixChoisie = "PrixChoisie"
     private val CLE_ChoixCasse = "Casse"
     private val CLE_CodeSecretSaisie = "CodeSecretSaisie"
-    private var mutablelistDonne = mutableListOf<Info>()
 
         override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        bindingMain = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bindingMain.root)
 
         //Activer toolbar
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(bindingMain.toolbar)
 
         //Verifie actif des le depart
         actif()
 
-        binding.btnJouer?.setOnClickListener{
+        bindingMain.btnJouer?.setOnClickListener{
 
             // Random les images
             imageUn = (0 .. (imageArray.size-1)).random()
             imageDeux = (0 .. (imageArray.size-1)).random()
             imageTrois = (0 .. (imageArray.size-1)).random()
-            binding.imageViewUn?.setImageResource(imageArray[imageUn])
-            binding.imageViewDeux?.setImageResource(imageArray[imageDeux])
-            binding.imageViewTrois?.setImageResource(imageArray[imageTrois])
+            bindingMain.imageViewUn?.setImageResource(imageArray[imageUn])
+            bindingMain.imageViewDeux?.setImageResource(imageArray[imageDeux])
+            bindingMain.imageViewTrois?.setImageResource(imageArray[imageTrois])
 
             //Montant choisie
             when
             {
-                binding.radioButtonUn?.isChecked == true -> prixChoisie = 1
-                binding.radioButtonDeux?.isChecked == true -> prixChoisie = 2
-                binding.radioButtonTrois?.isChecked == true -> prixChoisie = 5
+                bindingMain.radioButtonUn?.isChecked == true -> prixChoisie = 1
+                bindingMain.radioButtonDeux?.isChecked == true -> prixChoisie = 2
+                bindingMain.radioButtonTrois?.isChecked == true -> prixChoisie = 5
             }
 
             //Verifie si joueur gagne ou perte
-            if (binding.checkBoxCaisseSous?.isChecked == true)
+            if (bindingMain.checkBoxCaisseSous?.isChecked == true)
             {
                 when
                 {
@@ -109,17 +113,18 @@ class MainActivity : AppCompatActivity() {
             }
 
             actifs += prixGagne
-            binding.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$")
+            bindingMain.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$")
 
             actif()
 
             //Garde les infos
             booGagneOuPas = prixGagne > 0
-            mutablelistDonne.add(Info(mutablelistDonne.size, imageArray[imageUn], imageArray[imageDeux], imageArray[imageTrois], prixGagne, booGagneOuPas, booCocheCasse, prixChoisie, actifs))
+            nbCou += 1
+            monData.addInfo(nbCou, imageArray[imageUn], imageArray[imageDeux], imageArray[imageTrois], prixGagne, booGagneOuPas, booCocheCasse, prixChoisie, actifs)
         }
 
         // Voir si le mot de passe est correct
-        binding.editTextTextCodeSecret?.addTextChangedListener(object :TextWatcher{
+        bindingMain.editTextTextCodeSecret?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -130,8 +135,8 @@ class MainActivity : AppCompatActivity() {
                 {
                     "passe" -> {
                         actifs += 100;
-                        binding.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$");
-                        binding.editTextTextCodeSecret?.setText("")
+                        bindingMain.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$");
+                        bindingMain.editTextTextCodeSecret?.setText("")
                     }
                 }
 
@@ -147,21 +152,21 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        binding.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$")
-        binding.imageViewUn?.setImageResource(imageArray[imageUn])
-        binding.imageViewDeux?.setImageResource(imageArray[imageDeux])
-        binding.imageViewTrois?.setImageResource(imageArray[imageTrois])
+        bindingMain.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$")
+        bindingMain.imageViewUn?.setImageResource(imageArray[imageUn])
+        bindingMain.imageViewDeux?.setImageResource(imageArray[imageDeux])
+        bindingMain.imageViewTrois?.setImageResource(imageArray[imageTrois])
         when (prixChoisie)
         {
-            1 -> binding.radioButtonUn?.isChecked = true
-            2 -> binding.radioButtonDeux?.isChecked = true
-            5 -> binding.radioButtonTrois?.isChecked = true
+            1 -> bindingMain.radioButtonUn?.isChecked = true
+            2 -> bindingMain.radioButtonDeux?.isChecked = true
+            5 -> bindingMain.radioButtonTrois?.isChecked = true
         }
         when(booCocheCasse)
         {
-            true -> binding.checkBoxCaisseSous?.isChecked = true
+            true -> bindingMain.checkBoxCaisseSous?.isChecked = true
         }
-        binding.editTextTextCodeSecret?.setText(strCodeSecret)
+        bindingMain.editTextTextCodeSecret?.setText(strCodeSecret)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -174,7 +179,7 @@ class MainActivity : AppCompatActivity() {
         outState.putInt(CLE_ImageTrois, imageTrois)
         outState.putInt(CLE_PrixChoisie, prixChoisie)
 
-        if (binding.checkBoxCaisseSous?.isChecked == true)
+        if (bindingMain.checkBoxCaisseSous?.isChecked == true)
         {
             outState.putBoolean(CLE_ChoixCasse, true)
         }
@@ -183,7 +188,7 @@ class MainActivity : AppCompatActivity() {
             outState.putBoolean(CLE_ChoixCasse, false)
         }
 
-        outState.putString(CLE_CodeSecretSaisie, binding.editTextTextCodeSecret.text.toString())
+        outState.putString(CLE_CodeSecretSaisie, bindingMain.editTextTextCodeSecret.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -204,26 +209,26 @@ class MainActivity : AppCompatActivity() {
         when
         {
             actifs < 1 -> {
-                binding.radioButtonUn?.isEnabled=false;
-                binding.radioButtonDeux?.isEnabled=false;
-                binding.radioButtonTrois?.isEnabled=false;
-                binding.btnJouer?.isEnabled=false;
+                bindingMain.radioButtonUn?.isEnabled=false;
+                bindingMain.radioButtonDeux?.isEnabled=false;
+                bindingMain.radioButtonTrois?.isEnabled=false;
+                bindingMain.btnJouer?.isEnabled=false;
             }
             actifs < 2 -> {
-                binding.radioButtonDeux?.isEnabled=false;
-                binding.radioButtonTrois?.isEnabled=false;
+                bindingMain.radioButtonDeux?.isEnabled=false;
+                bindingMain.radioButtonTrois?.isEnabled=false;
             }
             actifs < 5 -> {
-                binding.radioButtonTrois?.isEnabled=false
+                bindingMain.radioButtonTrois?.isEnabled=false
             }
             else -> {
-                binding.radioButtonUn?.isEnabled=true;
-                binding.radioButtonDeux?.isEnabled=true;
-                binding.radioButtonTrois?.isEnabled=true;
-                binding.btnJouer?.isEnabled=true;
+                bindingMain.radioButtonUn?.isEnabled=true;
+                bindingMain.radioButtonDeux?.isEnabled=true;
+                bindingMain.radioButtonTrois?.isEnabled=true;
+                bindingMain.btnJouer?.isEnabled=true;
                 when (prixChoisie)
                 {
-                    0 -> binding.radioButtonUn.isChecked = true
+                    0 -> bindingMain.radioButtonUn.isChecked = true
                 }
             }
         }
@@ -239,17 +244,19 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId){
             R.id.menu_Item_Rafraichir ->
             {
-                mutablelistDonne.clear()
+                DataSource().reInitialisation()
                 Toast.makeText(this, "Les statistique sont effacer", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.menu_Item_Static ->
             {
-                when(mutablelistDonne.size)
+                when(nbCou)
                 {
                     0 -> Toast.makeText(this, "Aucune statistique disponible a l'heure actuelle", Toast.LENGTH_SHORT).show()
                     else ->{
-                        startActivity(Intent(this@MainActivity, StatsActivity::class.java))
+                        var intent = Intent(this@MainActivity, StatsActivity::class.java)
+                        //intent.putExtra("mutList", monData.getList())
+                        startActivity(intent)
                     }
                 }
                 true

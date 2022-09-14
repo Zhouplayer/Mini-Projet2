@@ -16,7 +16,9 @@
         <activity
             android:name="com.example.mini_projet2.StatsActivity"
             android:exported="false"
-            android:parentActivityName="com.example.mini_projet2.MainActivity"/>
+            android:parentActivityName="com.example.mini_projet2.MainActivity">
+
+        </activity>
         <activity
             android:name="com.example.mini_projet2.MainActivity"
             android:exported="true">

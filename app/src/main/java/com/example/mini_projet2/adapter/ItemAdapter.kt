@@ -22,7 +22,6 @@ class ItemAdapter(private val context:Context, private val dataset: MutableList<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
 
         val bindingAdapter = RvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
         return ItemViewHolder(bindingAdapter)
     }
 
