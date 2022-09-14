@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity(){
         //Activer toolbar
         setSupportActionBar(bindingMain.toolbar)
 
-        //Verifie actif des le depart
+        //Remettre les donnes et Verifie actif des le depart
+
         actif()
 
         bindingMain.btnJouer?.setOnClickListener{
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity(){
 
             //Garde les infos
             var booGagneOuPas = prixGagne > 0
+            booCocheCasse = bindingMain.checkBoxCaisseSous.isChecked
             DataSource.addInfo(DataSource.getList().size+1, imageArray[imageUn], imageArray[imageDeux], imageArray[imageTrois], prixGagne, booGagneOuPas, booCocheCasse, prixChoisie, actifs)
         }
 
@@ -141,26 +143,37 @@ class MainActivity : AppCompatActivity(){
 
             }
         })
+
+
     }
 
     override fun onResume() {
         super.onResume()
 
-        bindingMain.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$")
-        bindingMain.imageViewUn?.setImageResource(imageArray[imageUn])
-        bindingMain.imageViewDeux?.setImageResource(imageArray[imageDeux])
-        bindingMain.imageViewTrois?.setImageResource(imageArray[imageTrois])
-        when (prixChoisie)
+        if (DataSource.getList().size > 0)
         {
-            1 -> bindingMain.radioButtonUn?.isChecked = true
-            2 -> bindingMain.radioButtonDeux?.isChecked = true
-            5 -> bindingMain.radioButtonTrois?.isChecked = true
+            resetDonne()
+            actif()
         }
-        when(booCocheCasse)
+        else
         {
-            true -> bindingMain.checkBoxCaisseSous?.isChecked = true
+            bindingMain.tvActif?.setText(getString(R.string.tvActif) + " " + actifs + "$")
+            bindingMain.imageViewUn?.setImageResource(imageArray[imageUn])
+            bindingMain.imageViewDeux?.setImageResource(imageArray[imageDeux])
+            bindingMain.imageViewTrois?.setImageResource(imageArray[imageTrois])
+            when (prixChoisie)
+            {
+                1 -> bindingMain.radioButtonUn?.isChecked = true
+                2 -> bindingMain.radioButtonDeux?.isChecked = true
+                5 -> bindingMain.radioButtonTrois?.isChecked = true
+            }
+            when(booCocheCasse)
+            {
+                true -> bindingMain.checkBoxCaisseSous?.isChecked = true
+            }
+            bindingMain.editTextTextCodeSecret?.setText(strCodeSecret)
         }
-        bindingMain.editTextTextCodeSecret?.setText(strCodeSecret)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -173,9 +186,7 @@ class MainActivity : AppCompatActivity(){
         outState.putInt(CLE_ImageTrois, imageTrois)
         outState.putInt(CLE_PrixChoisie, prixChoisie)
 
-
-
-        if (bindingMain.checkBoxCaisseSous?.isChecked == true)
+        if (bindingMain.checkBoxCaisseSous?.isChecked)
         {
             outState.putBoolean(CLE_ChoixCasse, true)
         }
@@ -224,7 +235,10 @@ class MainActivity : AppCompatActivity(){
                 bindingMain.btnJouer?.isEnabled=true;
                 when (prixChoisie)
                 {
-                    0 -> bindingMain.radioButtonUn.isChecked = true
+                    0,1 -> bindingMain.radioButtonUn.isChecked = true
+                    2 -> bindingMain.radioButtonDeux.isChecked = true
+                    5 -> bindingMain.radioButtonTrois.isChecked = true
+                    else -> Toast.makeText(this, "Montant choisie n'existe pas", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -258,6 +272,31 @@ class MainActivity : AppCompatActivity(){
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    //Remettre les donnes
+    fun resetDonne()
+    {
+
+        var donne = DataSource.getList().last()
+
+        //Remmettre donne
+        actifs = donne.actifNouveau
+        prixChoisie = donne.montantChoix
+        booCocheCasse = donne.modeChoix
+
+        bindingMain.tvActif.text = getString(R.string.tvActif) + " " + donne.actifNouveau + "$"
+        bindingMain.imageViewUn.setImageResource(donne.imgUn)
+        bindingMain.imageViewDeux.setImageResource(donne.imgDeux)
+        bindingMain.imageViewTrois.setImageResource(donne.imgTrois)
+        when(donne.montantChoix)
+        {
+            1 -> bindingMain.radioButtonUn.isChecked = true
+            2 -> bindingMain.radioButtonDeux.isChecked = true
+            5 -> bindingMain.radioButtonTrois.isChecked = true
+            else -> Toast.makeText(this, "Montant choisie n'existe pas", Toast.LENGTH_SHORT).show()
+        }
+        bindingMain.checkBoxCaisseSous.isChecked = donne.modeChoix
     }
 
 }
