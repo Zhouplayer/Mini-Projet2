@@ -1,13 +1,10 @@
 package com.example.mini_projet2
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.example.mini_projet2.databinding.ActivityStatsBinding
 import com.example.mini_projet2.adapter.ItemAdapter
 import com.example.mini_projet2.data.DataSource
-import com.example.mini_projet2.model.Info
 
 class StatsActivity : AppCompatActivity() {
 
@@ -19,11 +16,12 @@ class StatsActivity : AppCompatActivity() {
         bindingStat = ActivityStatsBinding.inflate(layoutInflater)
         setContentView(bindingStat.root)
 
+        //toolbar settings
         setSupportActionBar(bindingStat.toolbar2)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_white_arrow_back_24)
-        //supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        //demande recyclerView a utiliser des donnes
         val myList = DataSource.getList()
         val ryView = bindingStat.rvInfos
         ryView.adapter = ItemAdapter(this, myList)

@@ -3,7 +3,6 @@ package com.example.mini_projet2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
@@ -11,7 +10,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.mini_projet2.data.DataSource
 import com.example.mini_projet2.databinding.ActivityMainBinding
-import com.example.mini_projet2.model.Info
 
 class MainActivity : AppCompatActivity(){
 
