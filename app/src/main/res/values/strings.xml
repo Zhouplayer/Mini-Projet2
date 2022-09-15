@@ -15,4 +15,5 @@
     <string name="statMise">Mise: </string>
     <string name="statGain">Gain: </string>
     <string name="statNouveauSolde">Nouveau solde: </string>
+    <string name="statPerte">Perte: </string>
 </resources>

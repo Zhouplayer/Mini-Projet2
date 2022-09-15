@@ -33,14 +33,16 @@ class ItemAdapter(private val context:Context, private val dataset: MutableList<
         holder.imgUn.setImageResource(item.imgUn)
         holder.imgDeux.setImageResource(item.imgDeux)
         holder.imgTrois.setImageResource(item.imgTrois)
-        holder.tvInfos.text = context.getString(R.string.statMise) + item.montantChoix + "$," + context.getString(R.string.statGain) + item.montantGagne + "$\n" + context.getString(R.string.statNouveauSolde) + item.actifNouveau + "$"
+
         if (item.GagneOuPas)
         {
             holder.bindingItem.mtCard.setBackgroundColor(Color.RED)
+            holder.tvInfos.text = context.getString(R.string.statMise) + item.montantChoix + "$," + context.getString(R.string.statGain) + item.montantGagne + "$\n" + context.getString(R.string.statNouveauSolde) + item.actifNouveau + "$"
         }
         else
         {
             holder.bindingItem.mtCard.setBackgroundColor(Color.WHITE)
+            holder.tvInfos.text = context.getString(R.string.statMise) + item.montantChoix + "$," + context.getString(R.string.statPerte) + item.montantGagne + "$\n" + context.getString(R.string.statNouveauSolde) + item.actifNouveau + "$"
         }
     }
 

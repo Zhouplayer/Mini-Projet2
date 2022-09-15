@@ -254,8 +254,25 @@ class MainActivity : AppCompatActivity(){
         return when(item.itemId){
             R.id.menu_Item_Rafraichir ->
             {
+                //Reset les donnes
+                actifs = 100
+                bindingMain.tvActif.text = getString(R.string.tvActif) + actifs +" $"
+                prixChoisie = 5
+                bindingMain.checkBoxCaisseSous.isChecked = false
+                actif()
+
+                // Random les images
+                imageUn = (0 .. (imageArray.size-1)).random()
+                imageDeux = (0 .. (imageArray.size-1)).random()
+                imageTrois = (0 .. (imageArray.size-1)).random()
+                bindingMain.imageViewUn?.setImageResource(imageArray[imageUn])
+                bindingMain.imageViewDeux?.setImageResource(imageArray[imageDeux])
+                bindingMain.imageViewTrois?.setImageResource(imageArray[imageTrois])
+
+                //Reinitialiser la list
                 DataSource.reInitialisation()
                 Toast.makeText(this, "Les statistique sont effacer", Toast.LENGTH_SHORT).show()
+
                 true
             }
             R.id.menu_Item_Static ->

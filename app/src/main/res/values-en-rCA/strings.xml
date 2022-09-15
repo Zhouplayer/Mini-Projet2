@@ -13,4 +13,5 @@
     <string name="statMise">"Put: "</string>
     <string name="statGain">"Win: "</string>
     <string name="statNouveauSolde">"New balance: "</string>
+    <string name="statPerte">Lost:</string>
 </resources>
